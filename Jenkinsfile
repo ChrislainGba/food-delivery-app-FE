@@ -45,11 +45,11 @@ tools {
 
      stage('Update Image Tag in GitOps') {
       steps {
-         checkout scmGit(branches: [[name: '*/master']], extensions: [], userRemoteConfigs: [[credentialsId: 'git@github.com:ChrislainGba/deployment-folder.git']])
+         checkout scmGit(branches: [[name: '*/master']], extensions: [], userRemoteConfigs: [[credentialsId: 'git-ssh', url: 'git@github.com:ChrislainGba/deployment-folder.git']])
         script {
           // Set the new image tag with the Jenkins build number
        sh '''
-          sed -i "s/image:.*/image: codedecode25\\/food-delivery-app-fe:${VERSION}/" aws/angular-manifest.yml
+          sed -i "s/image:.*/image: chrislain\\/food-delivery-app-fe:${VERSION}/" aws/angular-manifest.yml
         '''
 
           sh 'git checkout master'
